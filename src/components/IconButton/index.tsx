@@ -1,15 +1,26 @@
 import { ButtonHTMLAttributes } from 'react';
 import { StyledIconButton, Title } from './styles';
-import { Transfer } from '../../assets';
+import { ArrowLeft, Transfer } from '../../assets';
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
+  icon: string;
 }
 
-function IconButton({ title, ...rest }: IconButtonProps) {
+function IconButton({ title, icon, ...rest }: IconButtonProps) {
+  const selectIcon = (icon: string) => {
+    if (icon === 'transfer') {
+      return <Transfer />;
+    }
+
+    if (icon === 'arrow-left') {
+      return <ArrowLeft />;
+    }
+  };
+
   return (
     <StyledIconButton {...rest}>
-      <Transfer />
+      {icon && selectIcon(icon)}
       <Title>{title}</Title>
     </StyledIconButton>
   );
